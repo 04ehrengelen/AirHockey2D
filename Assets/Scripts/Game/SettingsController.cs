@@ -12,6 +12,8 @@ public class SettingsController : MonoBehaviour
     public GameObject playButton;
     public GameObject settingsButton;
     public GameObject quitButton;
+    public GameObject playerVsAIButton;
+    public GameObject playerVsPlayerButton;
 
     [Header("Sensitivity Settings")]
     public Slider sensitivitySlider;
@@ -39,22 +41,28 @@ public class SettingsController : MonoBehaviour
 
     public void OpenSettings()
     {
-        settingsPanel.SetActive(true);
+    settingsPanel.SetActive(true);
 
-        titleText.SetActive(false);
-        playButton.SetActive(false);
-        settingsButton.SetActive(false);
-        quitButton.SetActive(false);
+    titleText.SetActive(false);
+    playButton.SetActive(false);
+    settingsButton.SetActive(false);
+    quitButton.SetActive(false);
+
+    playerVsAIButton.SetActive(false);
+    playerVsPlayerButton.SetActive(false);
     }
 
     public void CloseSettings()
     {
-        settingsPanel.SetActive(false);
+    settingsPanel.SetActive(false);
 
-        titleText.SetActive(true);
-        playButton.SetActive(true);
-        settingsButton.SetActive(true);
-        quitButton.SetActive(true);
+    titleText.SetActive(true);
+    playButton.SetActive(true);
+    settingsButton.SetActive(true);
+    quitButton.SetActive(true);
+
+    playerVsAIButton.SetActive(true);
+    playerVsPlayerButton.SetActive(true);
     }
 
     public void SetSensitivity(float value)

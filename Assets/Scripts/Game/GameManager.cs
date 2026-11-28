@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,10 @@ public class GameManager : MonoBehaviour
     public TMP_Text aiScoreText;
     public TMP_Text gameStatusText;
 
+    [Header("Player Name UI")]
+    public TMP_Text leftPlayerNameText;
+    public TMP_Text rightPlayerNameText;
+
     [Header("Game Over UI")]
     public GameObject gameOverPanel;
     public TMP_Text winnerText;
@@ -25,6 +30,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         UpdateScoreUI();
+        UpdateModeUI();
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
@@ -33,11 +39,32 @@ public class GameManager : MonoBehaviour
             gameStatusText.text = "AIR HOCKEY";
     }
 
+    private void UpdateModeUI()
+    {
+        if (GameSettings.gameMode == GameMode.PlayerVsAI)
+        {
+            if (leftPlayerNameText != null)
+                leftPlayerNameText.text = "PLAYER 1";
+
+            if (rightPlayerNameText != null)
+                rightPlayerNameText.text = "AI";
+        }
+        else
+        {
+            if (leftPlayerNameText != null)
+                leftPlayerNameText.text = "PLAYER 1";
+
+            if (rightPlayerNameText != null)
+                rightPlayerNameText.text = "PLAYER 2";
+        }
+    }
+
     public void AddPlayerScore()
     {
         if (gameFinished) return;
 
         playerScore++;
+
         UpdateScoreUI();
         CheckWinner();
     }
@@ -47,6 +74,7 @@ public class GameManager : MonoBehaviour
         if (gameFinished) return;
 
         aiScore++;
+
         UpdateScoreUI();
         CheckWinner();
     }
@@ -64,11 +92,14 @@ public class GameManager : MonoBehaviour
     {
         if (playerScore >= winningScore)
         {
-            FinishGame("PLAYER WINS!");
+            FinishGame("PLAYER 1 WINS!");
         }
         else if (aiScore >= winningScore)
         {
-            FinishGame("AI WINS!");
+            if (GameSettings.gameMode == GameMode.PlayerVsAI)
+                FinishGame("AI WINS!");
+            else
+                FinishGame("PLAYER 2 WINS!");
         }
     }
 
